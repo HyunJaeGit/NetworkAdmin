@@ -1,6 +1,8 @@
 <!-- 프로젝트 목적, 데이터 보존 절차, 로컬 검증과 사용자가 수행할 배포 방법을 안내합니다. -->
 # NetworkAdmin
 
+실행 주소: [https://hyunjaegit.github.io/NetworkAdmin/](https://hyunjaegit.github.io/NetworkAdmin/)
+
 네트워크관리사 2급 용어를 실제 통신 과정과 연결하는 한국어 정적 학습 사이트입니다. 순수 HTML·CSS·JavaScript만 사용하며 설치할 프로젝트 의존성, 빌드 과정, 백엔드가 없습니다.
 
 ## 2026-10-07 작업 정리
