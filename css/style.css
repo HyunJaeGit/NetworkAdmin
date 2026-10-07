@@ -1,0 +1,316 @@
+/* 공통 디자인: 외부 폰트 없이 가독성, 상대 경로 배포, 반응형 지도를 지원합니다. */
+:root{color-scheme:light;--paper:#f7f8fa;--ink:#172c36;--muted:#586c75;--line:#dce4e7;--accent:#087d70;--soft:#eaf5f1;--white:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Segoe UI","Malgun Gothic",sans-serif;font-size:15px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+a,button{-webkit-tap-highlight-color:transparent}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid #1266c4;outline-offset:5px;border-radius:4px}
+[hidden]{display:none!important}
+h1,h2,h3,p{margin:0}
+.skip-link{position:absolute;top:-100px;left:16px;z-index:10;background:var(--ink);color:white;padding:12px 20px}
+.skip-link:focus{top:12px}
+.site-header{background:var(--white);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1240px;min-height:92px;margin:auto;padding:16px 32px;display:flex;align-items:center;gap:42px}
+.brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:750;letter-spacing:-.5px}
+.brand small{display:block;font-size:9px;letter-spacing:1.6px;color:var(--muted);font-weight:600;margin-top:1px}
+.brand-mark{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:11px;background:var(--accent);color:white;font-size:24px;font-weight:700}
+.brand-mark span{font-size:15px;align-self:flex-start;margin-top:6px}
+.header-inner nav{display:flex;gap:28px;margin-left:auto;font-size:13px;font-weight:600}
+.header-inner nav a{padding:10px 0}
+.phase-badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-size:10px;letter-spacing:1px;font-weight:700;color:var(--muted)}
+.phase-badge span{letter-spacing:0;font-weight:400;border-left:1px solid var(--line);padding-left:10px}
+main{max-width:1240px;padding:0 32px;margin:auto}
+.hero{padding:64px 0 54px;display:grid;grid-template-columns:1.4fr 1fr;align-items:center;gap:50px}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.8px;color:var(--muted)}
+.accent{color:var(--accent)}
+h1{font-size:clamp(32px,3.6vw,47px);line-height:1.35;letter-spacing:-2px;font-weight:750;margin:16px 0 20px}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-description{font-size:15px;line-height:1.9;color:var(--muted)}
+.hero-note{padding:26px 28px;border:1px solid #d6e6df;background:#eef5f1;border-radius:14px;max-width:385px;justify-self:end;width:100%}
+.note-icon{display:block;color:var(--accent);font-size:26px;margin-bottom:8px;line-height:1}
+.hero-note strong{font-size:15px}
+.hero-note p{font-size:12px;color:var(--muted);margin:9px 0 20px;line-height:1.9}
+.hero-note>div{border-top:1px solid #d3e1da;padding-top:14px;display:flex;gap:26px;font-size:11px;color:var(--muted)}
+.hero-note b{font-size:22px;color:var(--accent);margin-right:5px;font-weight:600}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}
+h2{font-size:23px;letter-spacing:-.8px;margin-top:7px;line-height:1.5}
+.section-description{font-size:12px;color:var(--muted);margin:10px 0 24px}
+.legend{display:flex;gap:18px;font-size:11px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:7px}
+.legend i{width:23px;display:inline-block}
+.solid-line{border-top:2px solid #536d79}
+.dotted-line{border-top:2px dashed var(--accent)}
+.concept-map{border:1px solid var(--line);border-radius:16px;background-color:#f0f4f5;background-image:radial-gradient(#d2dee2 .7px,transparent .7px);background-size:14px 14px;padding:24px}
+.map-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.map-card{position:relative;padding:17px 16px 12px;border:1px solid #d7e0e3;border-radius:10px;background:white;min-width:0;transition:border-color .15s,box-shadow .15s}
+/* 각 개념의 점선과 대상 문구는 장치의 실선 전달 경로와 구별됩니다. */
+.map-top .map-card:after,.map-bottom .map-card:before{content:"";position:absolute;height:26px;border-left:2px dashed #8ea8a2;left:50%}
+.map-top .map-card:after{top:100%}
+.map-bottom .map-card:before{bottom:100%}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:5px}
+.card-top .eyebrow{font-size:8px;letter-spacing:1.1px}
+.selection-mark{color:#c9d7d4;font-size:9px}
+.map-card h3{font-size:16px;letter-spacing:-.6px;margin:9px 0}
+.map-card h3 a{display:block;padding:3px 0}
+.map-card h3 a span{font-size:13px;color:var(--muted)}
+.relation-label{font-size:11px;color:var(--muted)}
+.relation-target{font-size:10px;color:var(--accent);min-height:36px;display:flex;gap:4px;align-items:center;margin:6px 0}
+.relation-button{border:0;border-top:1px solid #e6edee;background:transparent;color:var(--muted);width:100%;min-height:44px;text-align:left;font-size:11px;padding:10px 0 0}
+.relation-button span{float:right}
+.relation-button:hover{color:var(--accent)}
+.path-panel{position:relative;margin:25px 0;padding:18px 22px 22px;background:#fff;border:1px solid #c9d8dc;border-radius:12px}
+.path-heading{display:flex;justify-content:space-between;gap:12px;font-size:10px;color:var(--accent);margin-bottom:22px}
+.path-heading .eyebrow{font-size:9px;letter-spacing:1px}
+.muted{color:var(--muted)}
+.communication-path{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:30px}
+.route-node{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid transparent;border-radius:10px;padding:12px 0;min-width:0}
+.route-node svg{width:29px;height:29px;stroke:var(--ink);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-bottom:9px}
+.route-node strong{font-size:13px}
+.route-node>span{font-size:10px;color:var(--muted);margin-top:3px}
+.route-arrow{position:absolute;left:calc(100% - 20px);width:70px;top:17px;text-align:center;color:#687f8a;z-index:1;pointer-events:none}
+.route-arrow span{display:block;font-size:8px;white-space:nowrap}
+.route-arrow b{font-size:31px;font-weight:400;line-height:1.1;display:block}
+.is-selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.is-selected .selection-mark,.is-selected .relation-button,.is-selected .relation-label{color:var(--accent)}
+.map-top .is-selected:after,.map-bottom .is-selected:before{border-color:var(--accent);border-width:3px}
+.is-related{background:var(--soft);border-color:#72b7a9}
+.is-related svg{stroke:var(--accent)}
+.has-selection .map-card:not(.is-selected) .relation-target{color:var(--muted)}
+.has-selection .map-card:not(.is-selected):after,.has-selection .map-card:not(.is-selected):before{border-color:#cbd6d9}
+.relation-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;min-height:70px;color:var(--accent);font-size:12px}
+.relation-bar button{flex-shrink:0;border:1px solid var(--line);border-radius:6px;padding:10px 14px;min-height:44px;background:white;color:var(--ink);font-size:11px}
+.relation-bar button:disabled{color:var(--muted);background:#edf1f2;cursor:default}
+.learning-section{padding:36px 0 64px}
+.quiet-label{font-size:11px;color:var(--muted)}
+.area-list{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;padding:0;margin:0;list-style:none}
+.area-list li{border-bottom:1px solid var(--line)}
+.area-list-link{display:flex;align-items:center;gap:15px;padding:22px 4px;min-height:130px}
+.list-number{font-size:12px;color:var(--accent);align-self:flex-start;padding-top:4px;font-weight:600}
+.area-list h3{font-size:15px;margin-bottom:4px}
+.area-list p{font-size:11px;color:var(--muted)}
+.list-relation{display:block;font-size:10px;color:var(--muted);margin-top:5px}
+.term-count{margin-left:auto;white-space:nowrap;font-size:10px;color:var(--muted)}
+.site-footer{max-width:1176px;margin:0 auto;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;font-size:10px;color:var(--muted)}
+.site-footer span span{margin:0 10px;color:#a4b5bd}
+/* 상세 페이지의 기존 역할 패널과 순차 탐색을 Phase 2 학습 화면에서도 유지합니다. */
+.detail-main{max-width:940px;padding-top:32px;padding-bottom:52px}
+.back-link{display:inline-block;font-size:12px;color:var(--muted);padding:10px 0}
+.detail-hero{padding:42px 0 34px}
+.detail-hero h1{margin:12px 0}
+.detail-tagline{font-size:21px;margin-bottom:17px}
+.detail-summary{max-width:700px;color:var(--muted);font-size:15px}
+.detail-count{display:inline-block;margin-top:20px;border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--muted)}
+.role-panel{padding:28px 32px;border:1px solid #cfe0d8;border-radius:12px;background:var(--soft)}
+.role-panel h2{font-size:20px}
+.role-target{margin-top:20px;font-size:20px;color:var(--accent);font-weight:650}
+.role-relation{border-top:2px dashed #87b8aa;margin-top:15px;padding-top:15px;font-size:16px}
+.role-panel p:last-child{font-size:12px;color:var(--muted);margin-top:12px}
+.scope-panel{margin:24px 0;padding:28px 32px;background:white;border:1px solid var(--line);border-radius:12px}
+.scope-panel h2{font-size:19px;margin:13px 0 10px}
+.scope-panel p{color:var(--muted);font-size:13px;line-height:1.9}
+.sequence-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.sequence-nav a{padding:22px;border:1px solid var(--line);border-radius:10px;background:white}
+.sequence-nav a:last-child{text-align:right}
+.sequence-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:8px}
+.sequence-nav strong{font-size:15px}
+.sequence-note{color:var(--muted);font-size:11px;line-height:1.9;margin-top:20px;text-align:center}
+.notice{padding:15px;border:1px solid var(--line);font-size:12px}
+@media(min-width:761px) and (max-width:1050px){.map-grid{gap:10px}.concept-map{padding:16px}.map-card{padding:14px 10px 10px}.map-card h3{font-size:14px}.relation-target{min-height:52px}.hero{gap:24px}.term-count{display:none}}
+@media(max-width:760px){
+ .header-inner{min-height:78px;padding:14px 20px;gap:18px;flex-wrap:wrap}.brand{font-size:16px}.header-inner nav{gap:18px;font-size:12px}.header-inner>.phase-badge{display:none}
+ main{padding:0 20px}.hero{padding:38px 0;grid-template-columns:1fr;gap:26px}.hero-note{justify-self:start;max-width:none;padding:20px}.hero-note>div{padding-top:10px}.hero-note p{margin-bottom:12px}.hero h1{font-size:35px}.hero-description{font-size:13px}
+ .section-heading{align-items:flex-start;flex-direction:column;gap:12px}h2{font-size:21px}.section-description{line-height:1.85}.legend{gap:20px}.concept-map{padding:16px}.map-grid{grid-template-columns:1fr 1fr;gap:12px}.map-card{padding:14px 12px 10px}.map-card h3{font-size:15px}.relation-target{min-height:44px}
+ .map-top .map-card:after,.map-bottom .map-card:before{display:none}.relation-target{border-left:2px dashed #8ea8a2;padding-left:7px}.is-selected .relation-target{border-color:var(--accent)}
+ .path-panel{padding:18px 16px;margin:18px 0}.path-heading{flex-direction:column;gap:4px;margin-bottom:12px}.communication-path{grid-template-columns:1fr;gap:42px}.route-node{padding:13px 8px}.route-node svg{width:26px;height:26px;margin-bottom:6px}.route-node strong{font-size:15px}.route-node>span{font-size:11px}
+ .route-arrow{left:50%;top:calc(100% + 2px);width:140px;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:8px;height:38px}.route-arrow span{font-size:10px;order:2}.route-arrow b{transform:rotate(90deg);font-size:28px}
+ .relation-bar{align-items:flex-start}.relation-bar p{padding-top:10px}.learning-section{padding-top:24px}.area-list{grid-template-columns:1fr}.area-list-link{min-height:116px;gap:12px}.site-footer{margin:0 20px;flex-direction:column;gap:5px}.detail-main{padding-top:20px}.detail-hero{padding-top:30px}.detail-tagline{font-size:19px}.role-panel,.scope-panel{padding:24px}.sequence-nav a{padding:16px}.sequence-nav strong{font-size:13px}
+}
+@media(max-width:380px){main{padding:0 14px}.header-inner{padding:12px 14px}.brand small{font-size:8px}.brand-mark{width:34px;height:34px}.header-inner nav{gap:14px}.map-grid{grid-template-columns:1fr}.relation-target{min-height:30px}.hero h1{font-size:31px}.term-count{white-space:normal;max-width:45px}.concept-map{padding:12px}.sequence-nav{gap:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Phase 2: 기존 색상·레이아웃 위에 용어 카드, 비교표와 안전한 원문 표시를 확장합니다. */
+.supplemental-count{margin-left:8px;background:var(--soft)}
+.position-path{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:22px 0 16px;padding:0}
+.position-path li{padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12px}
+.position-path li.is-related{background:#d9eee6;border-color:#80b8aa;color:#126455;font-weight:650}
+.role-panel>a{font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.lesson-toc,.area-navigation{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.lesson-toc a,.area-navigation a{display:inline-flex;align-items:center;min-height:44px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12px}
+.area-navigation{padding-bottom:22px;border-bottom:1px solid var(--line)}
+.area-navigation a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:white}
+.lesson-section{margin-top:40px;scroll-margin-top:24px}
+.lesson-section>h2{margin-bottom:17px}
+.lesson-section>p{font-size:14px;color:var(--muted);line-height:1.9}
+.lesson-section h3{font-size:18px;line-height:1.6;letter-spacing:-.4px}
+.lesson-section h4{font-size:13px;margin:18px 0 6px}
+.scenario-steps{padding-left:24px;margin:18px 0}
+.scenario-steps>li{padding:0 0 20px 10px}
+.scenario-steps>li::marker{font-weight:700;color:var(--accent)}
+.scenario-steps h4{margin-top:0;font-size:15px}
+.scenario-steps p{font-size:14px;color:var(--muted)}
+.concept-links,.related-area-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.concept-links a,.term-index a{display:inline-flex;align-items:center;padding:8px 11px;min-height:44px;border:1px solid #cadfd7;border-radius:6px;background:#f1f8f5;font-size:12px;color:#166453;overflow-wrap:anywhere}
+.concept-links a:hover,.term-index a:hover{background:#dfeee8;text-decoration:underline}
+.related-area-links a{font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;min-height:44px;display:inline-flex;align-items:center;margin-right:10px}
+.term-index{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;scroll-margin-top:24px}
+.term-card{padding:27px 30px;margin:22px 0;border:1px solid var(--line);border-radius:12px;background:#fff;scroll-margin-top:24px;min-width:0}
+.term-card:target{border-color:var(--accent);box-shadow:0 0 0 2px #76b7a6}
+.term-card:focus-visible{outline:3px solid #1266c4;outline-offset:4px}
+.term-badge{display:inline-block;font-size:10px;border-radius:4px;padding:3px 8px;margin-bottom:10px;background:#eef1f4;color:#4c616c}
+.term-badge.supplement{color:#126455;background:#e4f3ec;border:1px solid #b6d6c9}
+.term-card h3{font-size:22px;overflow-wrap:anywhere}
+.term-aliases{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.9}
+.osi-note{border-left:3px solid #90b9ab;padding-left:12px;margin:15px 0;font-size:12px;color:#48655b;line-height:1.8}
+.term-explanation{font-size:15px;line-height:1.95;margin:16px 0}
+.example-text{font-size:14px;color:var(--muted);line-height:1.9}
+.preserve-lines{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+.study-list{padding-left:22px;margin:8px 0;font-size:13px;line-height:1.9}
+.study-list li+li{margin-top:6px}
+.clarification{background:#f0f6f3;border-left:3px solid var(--accent);padding:18px 20px;margin:22px 0;border-radius:0 8px 8px 0}
+.clarification dl{margin:0}
+.clarification dt{font-size:12px;font-weight:700;color:#176451;margin-top:14px}
+.clarification dt:first-child{margin-top:0}
+.clarification dd{font-size:13px;margin:5px 0 0;line-height:1.9}
+.original-text{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:20px 0;padding:4px 0}
+.original-text summary{padding:12px 0;cursor:pointer;font-size:13px;font-weight:600;min-height:44px}
+.original-text p{font-size:13px;line-height:1.9;color:var(--muted);padding-bottom:12px}
+.original-text h4{margin-top:12px}
+.original-text .empty-note{font-style:italic;font-size:12px}
+.reference-links{display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:11px;margin-top:14px;line-height:1.8}
+.reference-links:empty{display:none}
+.reference-links>span{font-weight:600;color:var(--muted)}
+.reference-links a{text-decoration:underline;text-underline-offset:3px;color:#286b61;padding:4px 0;overflow-wrap:anywhere}
+
+/* Phase 3: 내부 계층은 점선, 장치 간 경로는 실선으로 구분하며 자동 애니메이션은 사용하지 않습니다. */
+.journey-section{padding:30px 0 45px;border-top:1px solid var(--line)}
+.journey-start-link{display:inline-block;font-size:12px;color:var(--accent);padding:8px 0;margin-bottom:8px;text-decoration:underline}
+.journey-intro,.cache-note{font-size:13px;line-height:1.9;background:#edf5f1;border-left:3px solid var(--accent);padding:15px 18px;border-radius:0 8px 8px 0;margin:15px 0}
+.map-mode-note{font-size:12px;color:var(--muted);margin:18px 0 8px}
+.step-controls,.visual-choices{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 10px}
+.step-controls button,.visual-choices button,.map-sync-button{min-height:44px;border:1px solid #b8cec7;border-radius:7px;background:white;color:var(--ink);padding:9px 15px;font-size:13px}
+.step-controls [data-action="next"]{background:var(--accent);color:white;border-color:var(--accent)}
+.step-controls button:disabled{background:#e9eeec;color:#62736c;border-color:var(--line);cursor:default}
+.visual-choices [aria-pressed="true"]{background:var(--accent);color:white;border-color:var(--accent);font-weight:650}
+.step-state{font-weight:650;font-size:16px;color:#116758;padding:10px 0 14px;min-height:49px}
+.journey-step-track{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;list-style-position:inside;padding:0;margin:18px 0}
+.journey-step-track li{border:1px solid var(--line);border-radius:6px;background:#fff;padding:10px;font-size:11px}
+.journey-step-track [aria-current="step"]{border:2px solid var(--accent);background:var(--soft);font-weight:700}
+.journey-path{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;list-style:none;padding:0;margin:12px 0 20px}
+.journey-path li{padding:15px 12px;background:#edf0f2;border:1px solid #d7e0e4;border-radius:9px;min-width:0}
+.journey-path strong{font-size:13px;display:block}
+.journey-path span{display:block;font-size:10px;color:var(--muted);margin-top:8px}
+.journey-path .is-current-node{border:2px solid var(--accent);background:var(--soft)}
+.journey-path .journey-edge{padding-top:8px;border-top:2px solid #c5d1d5}
+.journey-path .is-current-edge{border-color:var(--accent);color:#086d5f;font-weight:650}
+.path-explanation{font-size:13px;font-weight:600;margin:14px 0;color:#206559}
+.journey-facts{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.journey-facts>div{padding:20px 22px;border:1px solid var(--line);border-radius:10px;background:white}
+.journey-facts h3,.journey-address>h3{font-size:15px;margin-bottom:10px}
+.journey-facts p{font-size:14px;line-height:1.9}
+.journey-address{margin:24px 0}
+.address-fields{display:grid;grid-template-columns:minmax(130px,.65fr) minmax(0,1.65fr);margin:12px 0;font-size:13px;line-height:1.8}
+.address-fields dt,.address-fields dd{padding:10px 12px;border-bottom:1px solid #e0e8e5;margin:0;min-width:0}
+.address-fields dt{font-weight:600;color:#49665e;background:#f0f5f2}
+.address-fields dd{background:white;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.packet-card{padding:18px;border:1px solid #ccdad5;border-radius:10px;background:#fff;min-width:0}
+.packet-card h4{margin:0 0 9px;font-size:14px}
+.packet-card .address-fields{margin-bottom:10px}
+.wire-caption{font-size:12px;color:var(--muted);margin:8px 0}
+.nat-note,.forward-note{padding:10px 12px;border:1px solid #d5dfda;border-radius:6px;font-size:12px;line-height:1.9;background:#f0f5f2}
+.nat-note{border-color:#bd9b53;background:#fff7e4;color:#6a501b;font-weight:650}
+.nat-explanation{background:#fffbef;border:1px solid #dcc99e;border-radius:9px;padding:18px 20px;margin-top:16px}
+.nat-explanation h4{font-size:14px;margin:0 0 10px}.nat-explanation>p{font-size:12px;line-height:1.9}
+.forwarding-strip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}
+.forwarding-strip .address-fields{display:block}.forwarding-strip .address-fields dt{font-size:11px;padding-bottom:2px}.forwarding-strip .address-fields dd{padding-top:3px}
+.visual-details{margin:18px 0;padding:0 15px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.visual-details summary{padding:14px 0;font-size:13px;cursor:pointer;min-height:44px}.visual-details[open]{padding-bottom:16px}
+.flow-area-label,.flow-node-label{display:block;font-size:10px;font-weight:700;color:#126454;margin-top:6px}
+.map-card.is-flow-area{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.map-top .is-flow-area:after,.map-bottom .is-flow-area:before{border-color:var(--accent);border-width:3px}
+.route-node.is-flow-node{background:#e3f3ea;border-color:var(--accent)}
+.route-arrow.is-flow-edge{color:#086b5c;font-weight:700}.route-arrow.is-flow-edge b{font-weight:800}
+.learning-visual{margin:22px 0 30px;padding:24px;border:1px solid #cbdcd4;border-radius:12px;background:#f6faf8;scroll-margin-top:24px}
+.learning-visual:target{outline:2px solid var(--accent);outline-offset:3px}
+.learning-visual>h3{margin-bottom:13px}.learning-visual .visual-explanation{font-size:14px;line-height:1.9;margin:14px 0}
+.encapsulation-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:18px 0}
+.layer-stack{border:1px dashed #a6bdb2;border-radius:8px;padding:14px;background:#fff}
+.layer-stack h4{margin:0 0 10px}.layer-stack ol{padding:0;margin:0;list-style:none}
+.layer-stack li{padding:12px 10px;border:1px dashed #cedbd4;border-radius:5px;margin-top:7px;font-size:12px}
+.layer-stack .current-layer{border:2px solid var(--accent);background:#e1f1e8;font-weight:700}
+.between-devices{grid-column:1/-1;border:2px solid #b5c9c0;background:#fff;border-radius:8px;padding:15px;font-size:12px;line-height:1.9}
+.between-devices.current-travel{border-color:var(--accent);background:var(--soft)}
+.packet-shell{padding:11px;border:1px solid #8eb2a3;background:#f5faf6;border-radius:5px;font-size:12px;margin-top:8px}
+.packet-shell .packet-shell{background:#eaf3ed}.signal-example{padding:15px;border:1px solid #c4d7cd;background:#fff;border-radius:7px;font-size:13px}
+.tcp-endpoints{display:flex;justify-content:space-between;gap:16px;font-size:13px;margin:16px 0}.tcp-endpoints strong:last-child{text-align:right}
+.tcp-message{border:1px solid #cfddd6;border-radius:7px;background:#fff;padding:13px;margin:9px 0;display:grid;grid-template-columns:110px 1fr;gap:7px;font-size:12px}
+.tcp-message>span:last-child{grid-column:2}.tcp-message.is-current-message{border:2px solid var(--accent);background:#e5f3eb}.message-index{font-size:11px}
+.subnet-summary{font-size:14px;line-height:1.9;margin:16px 0}.hop-track{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.hop-track li{padding:8px;border:1px solid #ccdcd3;border-radius:6px;font-size:11px;background:white}.hop-track [aria-current="step"]{background:#ddf0e5;border-color:var(--accent);font-weight:650}
+.reliability-panels{display:grid;grid-template-columns:1fr 1fr;gap:15px}.reliability-panels>div{padding:16px;border:1px solid var(--line);border-radius:9px;background:white}.reliability-panels h4{margin:0 0 9px}
+.delivery-blocks{list-style:none;padding:0;display:grid;gap:8px}.delivery-blocks li{padding:12px;border:1px solid #b8cec2;background:#edf5f0;border-radius:6px;font-size:12px}.delivery-blocks .loss-focus{border-style:dashed;border-color:#9b782d;background:#fff9e8}
+@media(max-width:760px){
+ .journey-step-track{grid-template-columns:repeat(2,minmax(0,1fr))}.journey-path{grid-template-columns:1fr;gap:7px}.journey-path li{display:grid;grid-template-columns:1fr 1fr;padding:11px;gap:6px}.journey-path span{margin:0}.journey-path .journey-edge{grid-column:1/-1}
+ .journey-facts{grid-template-columns:1fr}.journey-facts>div{padding:17px}.address-fields{grid-template-columns:1fr}.address-fields dt{padding:8px 10px 2px}.address-fields dd{padding:6px 10px 10px}
+ .forwarding-strip{grid-template-columns:1fr}.packet-card{padding:14px}.learning-visual{padding:17px 13px}.encapsulation-grid{gap:10px}.layer-stack{padding:10px}.layer-stack li{padding:9px 6px;font-size:11px}
+ .tcp-message{grid-template-columns:1fr}.tcp-message>span:last-child{grid-column:auto}.tcp-endpoints{font-size:11px}.reliability-panels{grid-template-columns:1fr}.step-controls button,.visual-choices button{padding:9px 12px}
+ .header-inner nav{flex-wrap:wrap;gap:10px 18px}.header-inner{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){.learning-visual *,.journey-section *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.term-card>a:last-child{display:inline-block;font-size:11px;margin-top:15px;padding:10px 0;color:var(--muted);text-decoration:underline}
+.study-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:23px 0 15px;font-size:13px;line-height:1.85}
+.study-table caption{text-align:left;font-size:16px;font-weight:650;color:var(--ink);margin-bottom:13px}
+.study-table th,.study-table td{text-align:left;vertical-align:top;border:1px solid #d4e0df;padding:13px 14px;overflow-wrap:anywhere;word-break:normal}
+.study-table thead th{background:#e8f0ed;color:#245c4e}
+.study-table tbody th{font-weight:600;background:#f0f5f3;width:25%}
+.study-table td{background:#fff}
+.table-note{font-size:12px!important;color:var(--muted);line-height:1.9}
+.comparison-block{margin-bottom:30px}
+#exam{background:var(--soft);border:1px solid #cadfd7;padding:24px 28px;border-radius:12px}
+#exam .study-list{font-size:14px}
+@media(max-width:760px){
+ .supplemental-count{margin-left:0;margin-right:6px}.detail-hero>.detail-count{margin-right:8px}
+ .lesson-toc,.area-navigation{gap:6px}.lesson-toc a,.area-navigation a{padding:8px 10px;font-size:11px}
+ .term-card{padding:21px 18px}.term-card h3{font-size:20px}.term-finder{padding:16px}
+ .clarification{padding:15px 14px}.term-explanation{font-size:14px}.lesson-section{margin-top:32px}
+ .study-table{font-size:12px}.study-table th,.study-table td{padding:9px 8px}.study-table caption{font-size:15px}
+ .position-path{gap:6px}.position-path li{font-size:11px}.reference-links a{padding:7px 0}
+ #exam{padding:21px 18px}.scenario-steps{padding-left:20px}.scenario-steps>li{padding-left:6px}
+}
+
+/* 개념 중심 UI: 흐름은 먼저 보여주고 긴 설명은 사용자 선택으로 펼칩니다. */
+.hero{display:block;padding:30px 0 22px}.hero h1{font-size:32px;margin:8px 0}.hero-description{font-size:14px}
+.concept-map{padding:20px}.path-panel{margin:0}.communication-path{align-items:start}
+.route-node{min-width:0}.route-node .concept-links{justify-content:center;gap:6px;margin:12px 0 0}
+.route-node .concept-links a{font-size:12px;padding:8px;min-height:36px;background:white}
+.area-disclosure{margin-top:20px}.area-disclosure>summary{padding:14px 0;cursor:pointer;font-weight:600}
+.area-disclosure .map-grid{margin:14px 0}.area-disclosure .map-card:before,.area-disclosure .map-card:after{display:none}
+.map-card{padding:16px}.card-top,.relation-target{display:none}.relation-label{min-height:0}
+.relation-bar{font-size:12px}.journey-section{padding-top:28px}
+.term-card{padding:0 20px;margin:10px 0}.term-card>summary{padding:16px 0;cursor:pointer;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.term-card>summary:after{content:'＋';font-size:20px}.term-card[open]>summary:after{content:'−'}
+.term-card h3{font-size:17px;margin:0}.term-card>summary .term-badge{font-size:10px;margin:0}
+.term-card[open]{padding-bottom:20px}.term-card:not([open]){border-left-width:1px}
+.detail-hero{padding:24px 0 16px}.detail-count,.detail-summary,.area-navigation{display:none}
+.lesson-section{margin-top:24px}.lesson-section>.visual-details{margin:0}.lesson-toc{margin:12px 0}
+.concept-dialog{width:min(620px,calc(100% - 28px));max-height:85dvh;padding:24px;border:1px solid var(--line);border-radius:14px;color:var(--ink);background:white;overflow:auto}
+.concept-dialog::backdrop{background:rgb(15 35 40 / .45)}
+.dialog-close{display:block;margin-left:auto;border:1px solid var(--line);border-radius:6px;background:white;padding:10px 14px;font:inherit;cursor:pointer}
+.concept-dialog h2{font-size:25px;margin:12px 0 18px}.concept-dialog h3{font-size:15px;margin:20px 0 8px}
+.concept-dialog p{font-size:15px;line-height:1.9}.concept-dialog .dialog-context{font-size:12px;color:var(--muted);margin-top:16px}
+.concept-dialog a[data-full-concept]{display:inline-block;margin-top:16px;text-decoration:underline}
+summary:focus-visible{outline:3px solid #1266c4;outline-offset:3px}
+@media(max-width:760px){.hero h1{font-size:27px}.concept-map{padding:12px}.communication-path{gap:25px}.route-node{padding:12px}.route-node .concept-links{margin-top:7px}.concept-dialog{padding:18px}.term-card>summary{flex-wrap:wrap;gap:8px}}
+
+/* 가독성 개선: 흐름 우선 배치, 본문 크기와 직접 조작 영역 확보. */
+body{font-size:16px}.section-description,.hero-description,.detail-tagline{font-size:15px}
+.concept-links a,.route-node .concept-links a,.lesson-toc a{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
+.route-node strong{font-size:16px}.route-node>span,.path-heading .eyebrow{font-size:12px}
+.term-card:not([open]) .term-badge{display:none}.term-explanation,.example-text,.scenario-steps p{font-size:16px;line-height:1.85}
+.scenario-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-left:24px}.scenario-steps>li{padding:16px;background:white;border:1px solid var(--line);border-radius:10px;margin:0;min-width:0}
+.journey-step-track li{padding:0}.journey-step-track button{width:100%;min-height:48px;padding:12px;text-align:left;border:0;border-radius:6px;color:inherit;background:transparent;font-size:14px}
+.visual-details summary{font-size:15px}.lesson-section>h2{font-size:23px;margin-bottom:16px}.map-mode-note{font-size:13px}
+@media(max-width:760px){.scenario-steps{grid-template-columns:1fr}.concept-links a,.lesson-toc a{font-size:14px}.study-table{font-size:14px}.communication-path .route-node{padding:14px}.term-explanation{font-size:16px}}

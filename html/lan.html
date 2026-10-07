@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- 통신 흐름과 용어를 연결하는 개념 학습 화면입니다. -->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 내장 아이콘은 별도 파일 및 루트 favicon 요청 없이 동작합니다. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23087d70'/%3E%3Cpath d='M9 24V8l14 16V8' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <meta name="description" content="네트워크관리사 2급 개념을 실제 통신 경로와 연결하는 학습 지도">
+  <title>물리 연결·LAN · 네트워크 노트</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/data.js"></script>
+  <script defer src="../js/main.js"></script>
+</head>
+<body data-page-area="lan">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">N<span>↗</span></span><span>네트워크 노트<small>NETWORK ADMIN · LEVEL 2</small></span></a>
+  <nav aria-label="주 메뉴"><a href="../index.html#concept-map">통신 흐름</a><a href="../index.html#web-access">웹 접속 과정</a><a href="../index.html#learning-areas">학습 영역</a></nav>
+  
+</div></header>
+<main id="main" class="detail-main">
+  <a class="back-link" href="../index.html">← 전체 개념 지도로 돌아가기</a>
+  <section class="detail-hero" aria-labelledby="detail-title"><h1 id="detail-title">물리 연결·LAN</h1><p class="detail-tagline">가까운 장치들이 연결되는 방식</p><p class="detail-summary">케이블과 스위치, VLAN이 집·회사 안에서 데이터를 전달하는 방식을 연결해 봅니다.</p><span class="detail-count" data-count-for="lan"></span></section>
+  <section id="position" class="role-panel" aria-labelledby="role-title"><h2 id="role-title">전체 통신에서의 역할</h2><p class="role-target">내 컴퓨터 ↔ 집·회사 LAN</p><p class="role-relation">신호 전달과 내부망 구성</p><p>이 영역의 주 학습 분류는 개념 연결을 위한 구분입니다. 한 개념이 여러 지점에 관련될 수 있습니다.</p></section>
+  <!-- 공통 렌더러가 data.js의 주 영역 용어를 한 번씩 표시합니다. -->
+  <nav hidden class="lesson-toc" aria-label="학습 내용 바로가기">
+    <a href="#position">현재 위치</a><a href="#problem">해결하는 문제</a><a href="#scenario">사용 예시</a><a href="#concepts">핵심 용어</a><a href="#comparisons">개념 비교</a><a href="#related">관련 영역</a><a href="#exam">암기 포인트</a>
+  </nav>
+  <div id="detail-content"></div>
+  <noscript><p class="notice">상세 용어·비교표을 보려면 JavaScript를 켜 주세요. 영역의 역할 요약과 홈·이전·다음 페이지 링크는 그대로 이용할 수 있습니다.</p></noscript>
+  <!-- 순차 탐색은 학습 순서이며 OSI 계층 번호를 뜻하지 않습니다. -->
+  <nav class="sequence-nav" aria-label="이전 및 다음 학습 영역">
+    <a href="structure.html"><small>← 이전 영역 · 01</small><strong>통신 구조</strong></a>
+    <a href="address-routing.html"><small>다음 영역 · 03 →</small><strong>주소·경로</strong></a>
+  </nav>
+  <p class="sequence-note">통신 구조 → 물리·LAN → 주소·경로 → 전송 → 서비스 → 보안 → 서버 관리 → 가상화<br>이 순서는 학습 순서이며 OSI 계층 순서가 아닙니다.</p>
+</main>
+<footer class="site-footer"><span>네트워크 노트 <span aria-hidden="true">/</span> 네트워크관리사 2급</span><span>개념을 연결하면, 흐름이 보입니다.</span></footer>
+</body>
+</html>
