@@ -28,20 +28,20 @@ window.NetworkStudy = {
       "order": 1,
       "href": "html/structure.html",
       "lesson": {
-        "problem": "계층 이름을 외웠는데 같은 데이터가 어디서 어떻게 처리되는지 연결되지 않는 문제를 해결합니다. OSI와 TCP/IP는 같은 통신을 서로 다른 역할 구분으로 설명합니다.",
+        "problem": "브라우저가 만든 데이터가 TCP·IP·이더넷을 거쳐 전달되는 과정을 살펴봅니다. OSI와 TCP/IP는 이 통신을 서로 다른 계층으로 나누어 설명하는 모델입니다.",
         "scenarioTitle": "브라우저에서 HTTP/1.1 웹 페이지를 요청할 때",
         "steps": [
           [
-            "응용 데이터 만들기",
-            "브라우저가 서버에 보낼 HTTP 요청을 만듭니다.",
+            "HTTP 요청 만들기",
+            "브라우저가 웹 서버에 보낼 HTTP 요청을 만듭니다.",
             [
               "term-002",
               "term-056"
             ]
           ],
           [
-            "전송과 주소 정보 붙이기",
-            "TCP가 전송을 관리하고 IP가 목적지까지의 전달 정보를 제공합니다.",
+            "TCP와 IP 헤더 붙이기",
+            "TCP는 포트와 순서 번호 등의 정보를 붙이고, IP는 출발지와 목적지 IP 주소를 붙입니다.",
             [
               "term-004",
               "term-025",
@@ -49,8 +49,8 @@ window.NetworkStudy = {
             ]
           ],
           [
-            "링크로 보내고 다시 해석하기",
-            "이더넷 프레임으로 다음 홉에 전달하고, 수신 측에서는 해당 계층 정보를 해석합니다.",
+            "프레임으로 전송하기",
+            "PC가 데이터를 이더넷 프레임에 담아 다음 장치로 보냅니다. 받은 장치는 자신이 처리할 헤더를 확인합니다.",
             [
               "term-024",
               "supp-switch"
@@ -158,20 +158,20 @@ window.NetworkStudy = {
       "order": 2,
       "href": "html/lan.html",
       "lesson": {
-        "problem": "케이블로 연결했다고 모든 장치가 같은 방식으로 통신하는 것은 아닙니다. 신호 전달, MAC 기반 전달, VLAN의 범위를 구분해 가까운 장치 사이의 연결을 이해합니다.",
+        "problem": "PC에서 프린터까지 데이터가 이동하는 과정을 살펴봅니다. 케이블은 신호를 전달하고, 스위치는 MAC 주소를 보고 프레임을 보낼 포트를 선택합니다.",
         "scenarioTitle": "사무실 PC가 프린터로 보내는 통신",
         "steps": [
           [
-            "물리 연결 확인",
-            "PC와 프린터가 중앙 스위치에 연결됩니다.",
+            "PC와 프린터 연결",
+            "PC와 프린터를 스위치에 연결합니다.",
             [
               "term-049",
               "term-083"
             ]
           ],
           [
-            "링크 주소 확인",
-            "같은 IPv4 네트워크에서 대상 MAC을 모르면 ARP로 확인합니다.",
+            "프린터의 MAC 주소 확인",
+            "같은 IPv4 네트워크에 있는 프린터의 MAC 주소를 모르면 PC가 ARP로 확인합니다.",
             [
               "supp-arp",
               "supp-mac"
@@ -293,28 +293,28 @@ window.NetworkStudy = {
       "order": 3,
       "href": "html/address-routing.html",
       "lesson": {
-        "problem": "같은 LAN의 목적지인지 외부 네트워크인지 판단하고, 외부라면 다음에 누구에게 패킷을 맡길지 이해합니다. 주소 계산과 경로 선택은 서로 연결되지만 같은 작업은 아닙니다.",
+        "problem": "PC는 목적지가 같은 네트워크에 있는지 확인한 뒤 직접 보낼지 라우터로 보낼지 결정합니다. 라우터는 라우팅표를 보고 다음 경로를 선택합니다.",
         "scenarioTitle": "192.168.10.20/24 PC가 외부 웹 서버로 접속",
         "steps": [
           [
-            "내 네트워크 범위 확인",
-            "서브넷 마스크로 목적지가 같은 네트워크인지 판단합니다.",
+            "목적지의 네트워크 확인",
+            "PC가 서브넷 마스크를 이용해 목적지가 같은 네트워크에 있는지 판단합니다.",
             [
               "term-010",
               "term-011"
             ]
           ],
           [
-            "다음 홉으로 전달",
-            "일치하는 더 구체적인 경로가 없으면 기본 게이트웨이에 맡깁니다.",
+            "다음 라우터로 전송",
+            "목적지에 맞는 별도 경로가 없으면 PC가 기본 게이트웨이로 패킷을 보냅니다.",
             [
               "supp-gateway",
               "supp-arp"
             ]
           ],
           [
-            "경로 선택과 전달",
-            "라우터는 목적지 IP의 경로를 선택하고 IPv4 TTL을 줄여 전달합니다.",
+            "라우터가 다음 경로 선택",
+            "라우터가 목적지 IP 주소를 라우팅표와 비교합니다. 전달할 때는 IPv4 패킷의 TTL을 줄입니다.",
             [
               "supp-router",
               "term-006"
@@ -475,35 +475,35 @@ window.NetworkStudy = {
       "order": 4,
       "href": "html/transport.html",
       "lesson": {
-        "problem": "IP로 장치에 도착한 데이터가 어느 프로그램의 것인지, 누락과 순서를 누가 처리하는지 이해합니다. 포트는 목적 프로그램 구분, 전송 규칙은 전달 방식과 연결됩니다.",
+        "problem": "포트 번호는 데이터를 받을 서비스를 구분합니다. TCP는 데이터의 순서를 맞추고 누락된 데이터를 다시 보내며, UDP 자체에는 이 기능이 없습니다.",
         "scenarioTitle": "TCP 기반 파일 다운로드",
         "steps": [
           [
-            "연결할 서비스 선택",
-            "서버 IP뿐 아니라 목적지 포트로 통신 종단을 구분합니다.",
+            "접속할 서버와 포트 지정",
+            "클라이언트가 서버 IP 주소와 접속할 서비스의 포트 번호를 지정합니다.",
             [
               "term-007",
               "term-069"
             ]
           ],
           [
-            "연결 준비",
-            "일반적인 TCP는 세 메시지로 연결을 준비합니다.",
+            "TCP 연결 맺기",
+            "클라이언트와 서버가 SYN, SYN+ACK, ACK을 주고받아 연결을 맺습니다.",
             [
               "term-022"
             ]
           ],
           [
-            "데이터 전송과 조절",
-            "순서 있는 바이트 흐름을 제공하고 수신 여유에 맞추어 전송량을 조절합니다.",
+            "데이터 전송과 흐름 제어",
+            "TCP는 받은 데이터를 보낸 순서대로 프로그램에 전달합니다. 또한 상대가 받을 수 있는 양에 맞춰 전송량을 조절합니다.",
             [
               "term-018",
               "term-021"
             ]
           ],
           [
-            "여러 서버로 분산",
-            "L4 장비가 IP·포트 등으로 연결을 처리할 서버를 나눌 수 있습니다.",
+            "여러 서버로 연결 분산",
+            "서버가 여러 대라면 L4 장비가 IP 주소와 포트 등의 정보를 보고 연결을 처리할 서버를 선택할 수 있습니다.",
             [
               "term-076"
             ]
@@ -633,36 +633,36 @@ window.NetworkStudy = {
       "order": 5,
       "href": "html/services.html",
       "lesson": {
-        "problem": "주소를 받는 일, 이름을 찾는 일, 실제 웹·메일·파일 데이터를 교환하는 일을 구분합니다. 모두 응용 서비스이지만 해결하는 문제와 사용하는 포트가 다릅니다.",
+        "problem": "DHCP는 PC의 IP 설정을 제공하고, DNS는 도메인 이름에 해당하는 IP 주소 등을 알려 줍니다. 브라우저는 이 주소로 웹 서버에 HTTP 요청을 보냅니다.",
         "scenarioTitle": "새로 연결한 노트북에서 웹 열기",
         "steps": [
           [
             "IP 설정 받기",
-            "DHCP 서버에서 주소, 마스크, 게이트웨이와 DNS 설정을 받습니다.",
+            "자동 주소 설정을 사용하는 PC는 DHCP 서버에서 IP 주소, 서브넷 마스크, 기본 게이트웨이, DNS 서버 주소를 받습니다.",
             [
               "term-033",
               "term-034"
             ]
           ],
           [
-            "이름으로 주소 조회",
-            "DNS의 A 또는 AAAA 레코드로 목적지 주소를 찾습니다.",
+            "도메인의 IP 주소 찾기",
+            "PC가 DNS 서버에 A 또는 AAAA 레코드를 요청해 웹 서버의 IPv4 또는 IPv6 주소를 찾습니다.",
             [
               "term-050",
               "term-052"
             ]
           ],
           [
-            "서비스 요청 보내기",
-            "목적지의 웹 서비스로 요청하고 HTTPS라면 TLS 보호를 사용합니다.",
+            "웹 페이지 요청",
+            "브라우저가 웹 서버에 HTTP 요청을 보냅니다. HTTPS에서는 TLS로 요청과 응답을 보호합니다.",
             [
               "term-056",
               "supp-tls"
             ]
           ],
           [
-            "서버에서 처리",
-            "웹 서버가 바인딩 설정과 서비스 상태에 따라 요청을 처리합니다.",
+            "웹 서버가 응답",
+            "웹 서버가 요청을 처리하고 응답을 보냅니다. IIS에서는 바인딩 설정으로 요청을 받을 사이트를 구분합니다.",
             [
               "term-054",
               "term-055"
@@ -671,26 +671,26 @@ window.NetworkStudy = {
         ],
         "comparisons": [
           {
-            "title": "DHCP·DNS·HTTP의 서로 다른 질문",
+            "title": "DHCP·DNS·HTTP의 역할",
             "headers": [
               "서비스",
-              "해결하는 질문",
+              "하는 일",
               "기본 포트 학습"
             ],
             "rows": [
               [
                 "DHCPv4",
-                "내 IP 설정은 무엇인가?",
+                "PC의 IP 설정 제공",
                 "UDP 서버 67, 클라이언트 68"
               ],
               [
                 "DNS",
-                "이 이름에 어떤 정보가 연결되는가?",
+                "도메인 이름에 해당하는 IP 주소 등 조회",
                 "53 · UDP와 TCP"
               ],
               [
                 "HTTP·HTTPS",
-                "웹 자원을 어떻게 요청하는가?",
+                "웹 페이지 등의 데이터 요청과 응답",
                 "HTTP 80, HTTPS 443"
               ]
             ],
@@ -762,35 +762,35 @@ window.NetworkStudy = {
       "order": 6,
       "href": "html/security.html",
       "lesson": {
-        "problem": "연결이 된다는 것과 안전하게 통신한다는 것을 구분합니다. 접근 허용·차단, 통신 데이터 보호, 사설 연결 구성의 역할을 따로 이해해야 필요한 지점에 적용할 수 있습니다.",
+        "problem": "방화벽은 통신을 허용하거나 차단하고, VPN은 외부에서 사설망에 연결할 수 있게 합니다. IPsec과 TLS는 통신 내용을 보호합니다.",
         "scenarioTitle": "외부 직원이 회사 자원에 접근",
         "steps": [
           [
-            "접근 정책 확인",
-            "방화벽이 허용된 통신인지 규칙에 따라 판단합니다.",
+            "방화벽 규칙 확인",
+            "방화벽이 출발지·목적지 주소와 포트 등의 조건을 확인해 통신을 허용하거나 차단합니다.",
             [
               "term-081"
             ]
           ],
           [
-            "사설 연결 구성",
-            "필요하면 VPN으로 회사 내부망과의 연결을 구성합니다.",
+            "VPN으로 회사 내부망에 연결",
+            "외부 직원이 VPN을 이용해 회사 내부망에 접속합니다.",
             [
               "term-047",
               "term-028"
             ]
           ],
           [
-            "데이터 보호",
-            "IPsec 기반 VPN이나 HTTPS의 TLS처럼 실제 보호 기술을 확인합니다.",
+            "통신 내용 보호",
+            "IPsec 기반 VPN은 IP 패킷을 보호합니다. HTTPS에서는 TLS가 HTTP 요청과 응답을 보호합니다.",
             [
               "term-048",
               "supp-tls"
             ]
           ],
           [
-            "자원 권한 확인",
-            "연결 후에도 계정 인증과 자원 접근 권한은 별도로 적용됩니다.",
+            "계정과 접근 권한 확인",
+            "내부망에 연결된 뒤에도 사용자가 해당 파일이나 서비스에 접근할 권한이 있는지 확인합니다.",
             [
               "term-072",
               "term-066"
@@ -872,36 +872,36 @@ window.NetworkStudy = {
       "order": 7,
       "href": "html/server-management.html",
       "lesson": {
-        "problem": "패킷이 서버에 도착한 뒤 실제 서비스를 누가 실행하고, 어떤 계정과 권한으로 요청을 처리하는지 이해합니다. 운영체제 상태와 네트워크 상태를 함께 확인하되 같은 것으로 취급하지 않습니다.",
+        "problem": "서버에 연결되는데 웹 페이지가 열리지 않으면 서비스 실행 상태, 포트 설정, 로그와 파일 권한을 확인합니다. 사용하는 명령과 설정 도구는 운영체제에 따라 다릅니다.",
         "scenarioTitle": "서버 연결은 되지만 웹 응답이 오지 않을 때",
         "steps": [
           [
-            "서비스 실행 여부",
-            "systemctl이나 프로세스 조회로 서비스가 실행 중인지 봅니다.",
+            "서비스 실행 상태 확인",
+            "Linux에서는 systemctl이나 ps로 서비스가 실행 중인지 확인합니다. Windows에서는 서비스 관리 도구로 확인합니다.",
             [
               "term-067",
               "term-062"
             ]
           ],
           [
-            "포트·사이트 설정",
-            "수신 포트와 웹사이트 바인딩을 확인합니다.",
+            "포트와 웹사이트 설정 확인",
+            "서버가 요청을 받는 포트를 확인합니다. Windows IIS를 사용한다면 사이트의 IP·포트·호스트 이름 바인딩도 확인합니다.",
             [
               "term-065",
               "term-055"
             ]
           ],
           [
-            "자원과 로그 확인",
-            "프로세스 자원 사용량과 관련 로그에서 단서를 찾습니다.",
+            "CPU·메모리와 로그 확인",
+            "Linux에서는 top으로 CPU·메모리 사용량을 살펴봅니다. 서비스 오류 로그를 확인하고, 장치 인식 문제라면 커널 메시지도 확인합니다.",
             [
               "term-061",
               "term-068"
             ]
           ],
           [
-            "계정과 권한 확인",
-            "콘텐츠 접근 권한이나 도메인 계정 설정도 살펴봅니다.",
+            "파일과 계정 권한 확인",
+            "웹 서버가 콘텐츠 파일을 읽을 권한이 있는지 확인합니다. 도메인 계정을 사용하는 환경에서는 계정 설정도 확인합니다.",
             [
               "term-066",
               "term-072"
@@ -1025,34 +1025,34 @@ window.NetworkStudy = {
       "order": 8,
       "href": "html/virtualization.html",
       "lesson": {
-        "problem": "네트워크의 기능과 서버 자원을 반드시 전용 물리 장비 하나에 고정해야 하는지 생각해 봅니다. 제어 방식, 기능 구현, 자원 배치와 복원은 각각 다른 운영 문제입니다.",
+        "problem": "서버에서 가상 머신과 가상 방화벽을 실행하는 구성을 살펴봅니다. SDN은 네트워크 제어 방식을, NFV는 네트워크 기능을 소프트웨어로 구현하는 방식을 설명합니다.",
         "scenarioTitle": "가상 환경에 시험용 네트워크 구성",
         "steps": [
           [
-            "가상 머신 준비",
-            "Hyper-V 가상 머신을 만들고 변경 전 검사점 활용 여부를 판단합니다.",
+            "가상 머신 만들기",
+            "Hyper-V에서 실습용 가상 머신을 만듭니다. 설정 변경 전에 검사점을 만들면 필요할 때 이전 상태로 되돌릴 수 있습니다.",
             [
               "term-075"
             ]
           ],
           [
-            "네트워크 기능 배치",
-            "가상 방화벽 같은 소프트웨어 기능으로 연결을 구성할 수 있습니다.",
+            "가상 방화벽 설치",
+            "전용 장비 대신 서버에서 실행되는 가상 방화벽으로 통신을 허용하거나 차단할 수 있습니다.",
             [
               "term-041",
               "term-081"
             ]
           ],
           [
-            "정책과 전달 기능 구분",
-            "SDN은 제어와 전달의 구조를 다룹니다. NFV 사용 여부와는 별개입니다.",
+            "네트워크 전달 정책 관리",
+            "SDN에서는 전달 경로를 결정하는 기능과 실제로 데이터를 보내는 기능을 분리합니다. NFV와 함께 사용할 수도 있습니다.",
             [
               "term-040"
             ]
           ],
           [
-            "운영 위치 결정",
-            "자원 소유와 배치에 따라 클라우드 모델과 자체 운영 환경을 구분합니다.",
+            "서버를 운영할 환경 선택",
+            "자체 시설에서 운영할지 외부 클라우드를 이용할지 정합니다. 클라우드는 소유·운영 방식 등에 따라 퍼블릭·프라이빗·하이브리드로 구분합니다.",
             [
               "term-045"
             ]
@@ -1140,7 +1140,7 @@ window.NetworkStudy = {
       "keyword": "OSI 7계층",
       "originalMemory": "물데네전세표응 ('물리·데이터·네트워크·전송·세션·표현·응용')",
       "originalNote": "OSI = Open Systems Interconnection",
-      "explanation": "OSI는 통신 역할을 물리부터 응용까지 일곱 계층으로 나누는 참조 모델입니다. 실제 패킷이 OSI 장치 일곱 개를 차례로 지나간다는 뜻은 아닙니다.",
+      "explanation": "OSI는 네트워크 통신에 필요한 기능을 일곱 계층으로 나눈 모델입니다. 각 계층이 맡는 역할을 구분해 통신 과정을 설명합니다.",
       "primaryArea": "structure",
       "kind": "original",
       "aliases": [
@@ -1349,7 +1349,7 @@ window.NetworkStudy = {
       "keyword": "Port Number",
       "originalMemory": "어떤 애플리케이션/서비스인지 구분",
       "originalNote": "",
-      "explanation": "IP 주소가 통신 대상을 가리킨다면 포트 번호는 그 안에서 통신 종단을 구분합니다. TCP와 UDP는 각각 포트 번호 공간을 사용하며, 번호만으로 실제 응용 내용을 확정할 수는 없습니다.",
+      "explanation": "포트 번호는 한 장치에서 통신할 프로그램이나 서비스를 구분하는 데 사용합니다. 예를 들어 일반적인 HTTPS 서버는 TCP 443번 포트로 연결을 받습니다.",
       "primaryArea": "transport",
       "kind": "original",
       "aliases": [
@@ -1372,7 +1372,8 @@ window.NetworkStudy = {
       "sourceIds": [],
       "relatedAreas": [
         "services"
-      ]
+      ],
+      "learningNote": "TCP와 UDP는 포트 번호를 각각 관리합니다. 같은 번호를 사용할 수 있으며, 포트 번호만으로 실제 통신 내용을 확정할 수는 없습니다."
     },
     {
       "id": "term-008",
@@ -1746,7 +1747,7 @@ window.NetworkStudy = {
       "keyword": "TCP",
       "originalMemory": "연결형·신뢰성 보장; 순서·오류·흐름 제어; 연결 전 3-way handshake",
       "originalNote": "Transmission Control Protocol",
-      "explanation": "연결을 맺고 순서 있는 바이트 흐름을 제공합니다. 확인과 재전송으로 신뢰성을 제공하지만 영구적인 장애에서도 전송 성공을 보장하거나 상대 프로그램의 업무 처리를 보증하지는 않습니다.",
+      "explanation": "TCP는 상대와 연결을 맺은 뒤 데이터를 주고받는 프로토콜입니다. 누락된 데이터를 다시 보내고 순서를 맞춰 수신 프로그램에 전달합니다.",
       "primaryArea": "transport",
       "kind": "original",
       "aliases": [
@@ -1779,14 +1780,15 @@ window.NetworkStudy = {
       ],
       "relatedAreas": [
         "services"
-      ]
+      ],
+      "learningNote": "TCP는 데이터를 연속된 바이트로 다룹니다. 연결이 끊어지는 등의 장애가 생기면 전송에 실패할 수 있으며, 데이터 수신과 상대 프로그램의 작업 완료는 별개입니다."
     },
     {
       "id": "term-019",
       "keyword": "UDP",
       "originalMemory": "비연결형; 전달·순서 보장 없음; 지연에 민감한 통신에 활용",
       "originalNote": "User Datagram Protocol",
-      "explanation": "연결 설정 없이 데이터그램을 보냅니다. UDP 자체에는 전달 확인, 순서 복구, 재전송 기능이 없으며 필요한 기능은 상위 프로토콜이 추가할 수 있습니다.",
+      "explanation": "UDP는 연결을 맺는 절차 없이 데이터를 보냅니다. UDP 자체에는 전달 확인, 순서 복구, 재전송 기능이 없습니다.",
       "primaryArea": "transport",
       "kind": "original",
       "aliases": [
@@ -1808,7 +1810,8 @@ window.NetworkStudy = {
       "sourceIds": [],
       "relatedAreas": [
         "services"
-      ]
+      ],
+      "learningNote": "전달 확인이나 재전송이 필요하면 UDP를 사용하는 응용 프로그램 또는 상위 프로토콜에서 구현할 수 있습니다."
     },
     {
       "id": "term-020",
@@ -1913,7 +1916,7 @@ window.NetworkStudy = {
       "keyword": "TCP/IP 4계층",
       "originalMemory": "하위부터 네트워크 인터페이스 → 인터넷 → 전송 → 응용",
       "originalNote": "Transmission Control Protocol\r\nInternet Protocol",
-      "explanation": "TCP/IP는 인터넷 통신에 쓰이는 프로토콜 묶음의 이름이며 이를 계층으로 설명하는 모델도 뜻합니다. OSI 다음에 추가로 거치는 네 단계가 아니라 같은 통신을 다른 기준으로 구분한 것입니다.",
+      "explanation": "TCP/IP는 인터넷 통신에 사용하는 프로토콜 묶음입니다. 이를 네트워크 인터페이스·인터넷·전송·응용의 네 계층으로 나누어 설명할 수 있습니다. OSI와 TCP/IP는 같은 통신을 서로 다른 기준으로 나눈 모델입니다.",
       "primaryArea": "structure",
       "kind": "original",
       "aliases": [
@@ -2465,7 +2468,7 @@ window.NetworkStudy = {
       "keyword": "SDN",
       "originalMemory": "제어 평면·데이터 평면 분리; 중앙 컨트롤러로 네트워크 제어",
       "originalNote": "Software Defined Networking; NFV와 구분",
-      "explanation": "어떻게 전달할지 결정하는 제어 평면과 실제 데이터를 전달하는 데이터 평면을 분리하는 접근입니다. 중앙에서 정책을 관리하는 구조를 이해하는 개념이며, 단일 OSI 프로토콜이 아닙니다.",
+      "explanation": "SDN은 전달 경로를 결정하는 기능인 제어 평면과 실제로 데이터를 보내는 기능인 데이터 평면을 분리하는 방식입니다. 관리자는 제어 시스템을 통해 네트워크의 전달 정책을 관리할 수 있습니다.",
       "primaryArea": "virtualization",
       "kind": "original",
       "aliases": [
@@ -2488,14 +2491,15 @@ window.NetworkStudy = {
       "sourceIds": [],
       "relatedAreas": [
         "lan"
-      ]
+      ],
+      "learningNote": "SDN은 네트워크를 제어하는 구조를 설명하는 개념이며, 특정 OSI 계층의 프로토콜 하나를 뜻하지 않습니다."
     },
     {
       "id": "term-041",
       "keyword": "NFV",
       "originalMemory": "방화벽·라우터 등 네트워크 기능을 소프트웨어로 가상화 → 유연한 배포·확장",
       "originalNote": "Network Functions Virtualization; VNF = Virtual Network Function",
-      "explanation": "라우터나 방화벽 같은 네트워크 기능을 소프트웨어로 구현해 유연하게 배치합니다. 제어 구조를 바꾸는 SDN과 함께 쓰일 수 있지만 같은 개념은 아닙니다.",
+      "explanation": "NFV는 방화벽이나 라우터 같은 네트워크 기능을 전용 장비 대신 서버의 소프트웨어로 실행하는 방식입니다.",
       "primaryArea": "virtualization",
       "kind": "original",
       "aliases": [
@@ -2519,7 +2523,8 @@ window.NetworkStudy = {
       "sourceIds": [],
       "relatedAreas": [
         "security"
-      ]
+      ],
+      "learningNote": "SDN은 제어 방식을, NFV는 네트워크 기능의 구현 방식을 다룹니다. 두 방식을 함께 사용할 수도 있습니다."
     },
     {
       "id": "term-042",
@@ -2781,7 +2786,7 @@ window.NetworkStudy = {
       "keyword": "DNS",
       "originalMemory": "도메인 이름과 IP 주소 등의 정보 조회; 기본 53번 포트",
       "originalNote": "Domain Name System; IP = Internet Protocol",
-      "explanation": "이름에 연결된 주소와 여러 자원 레코드를 조회하는 분산 시스템입니다. 기본 포트는 53이며 UDP와 TCP를 모두 사용합니다.",
+      "explanation": "DNS는 도메인 이름에 연결된 IP 주소 등의 정보를 조회하는 시스템입니다. 기본 포트는 53번이며 UDP와 TCP를 모두 사용합니다.",
       "primaryArea": "services",
       "kind": "original",
       "aliases": [
@@ -2900,7 +2905,7 @@ window.NetworkStudy = {
       "keyword": "IIS",
       "originalMemory": "Windows 웹 서버; 홈 디렉터리 변경·가상 디렉터리·기본 문서 설정 가능",
       "originalNote": "Internet Information Services",
-      "explanation": "Windows에서 웹사이트 등을 제공하는 서버 소프트웨어입니다. 콘텐츠 위치와 사이트 설정을 관리하는 일은 프로토콜 계층 자체와 구분합니다.",
+      "explanation": "IIS는 Windows에서 웹사이트 등을 운영하는 서버 소프트웨어입니다. 웹사이트의 파일 위치와 요청을 받을 주소·포트 등을 설정할 수 있습니다.",
       "primaryArea": "server-management",
       "kind": "original",
       "aliases": [
@@ -3126,7 +3131,7 @@ window.NetworkStudy = {
       "keyword": "top",
       "originalMemory": "프로세스·CPU·메모리 사용 상태를 실시간 확인",
       "originalNote": "CPU = Central Processing Unit",
-      "explanation": "프로세스와 자원 사용 상태를 갱신하며 보여 주는 명령입니다. 서비스가 느린 이유를 조사할 때 단서가 되지만 한 화면만으로 원인을 확정하지는 않습니다.",
+      "explanation": "top은 실행 중인 프로세스와 CPU·메모리 사용량을 주기적으로 갱신해 보여 주는 명령입니다.",
       "primaryArea": "server-management",
       "kind": "original",
       "aliases": [
@@ -3147,7 +3152,8 @@ window.NetworkStudy = {
         "term-067"
       ],
       "sourceIds": [],
-      "relatedAreas": []
+      "relatedAreas": [],
+      "learningNote": "top은 원인을 조사하는 데 도움이 되지만 CPU·메모리 사용량만으로 지연 원인을 확정할 수는 없습니다."
     },
     {
       "id": "term-062",
@@ -3307,7 +3313,7 @@ window.NetworkStudy = {
       "keyword": "systemctl",
       "originalMemory": "systemd 서비스 관리; start 시작\r\nenable 부팅 자동 시작\r\nstatus 상태",
       "originalNote": "System Control; 암호 변경은 passwd, systemctl passwd 아님",
-      "explanation": "systemd가 관리하는 서비스 등의 상태와 동작을 제어합니다. start와 enable은 각각 현재 시작과 부팅 자동 시작 설정이므로 같은 동작이 아닙니다.",
+      "explanation": "systemctl은 systemd가 관리하는 서비스의 상태를 확인하거나 시작·중지하는 명령입니다. start는 서비스를 지금 시작하고, enable은 부팅할 때 자동으로 시작하도록 설정합니다.",
       "primaryArea": "server-management",
       "kind": "original",
       "aliases": [
@@ -4065,7 +4071,7 @@ window.NetworkStudy = {
       "expansions": [
         "TLS = Transport Layer Security"
       ],
-      "explanation": "통신 상대의 인증과 데이터의 기밀성·무결성을 제공하는 보안 프로토콜입니다. 일반적인 TCP 기반 HTTPS에서는 HTTP와 TCP 사이에서 응용 데이터를 보호합니다.",
+      "explanation": "TLS는 통신 상대를 인증하고 주고받는 데이터를 암호화하며, 데이터가 변조되었는지 확인하는 보안 프로토콜입니다. 일반적인 TCP 기반 HTTPS에서는 HTTP 데이터를 TLS로 보호해 전송합니다.",
       "example": "브라우저가 인증서를 검증하고 TLS로 보호된 연결에서 웹 요청과 응답을 주고받습니다.",
       "relatedTerms": [
         "term-056",
@@ -4410,9 +4416,9 @@ window.NetworkStudy = {
     "steps": [
       {
         "id": "settings",
-        "title": "내 IP 설정 확인",
-        "now": "이미 설정된 IP, 서브넷 마스크, 기본 게이트웨이와 DNS 서버 주소를 확인합니다.",
-        "why": "내 네트워크 범위와 외부 목적지로 가는 출구, 이름을 조회할 대상을 알아야 합니다.",
+        "title": "PC의 IP 설정 확인",
+        "now": "PC에 설정된 IP 주소, 서브넷 마스크, 기본 게이트웨이, DNS 서버 주소를 확인합니다.",
+        "why": "PC는 이 설정으로 같은 네트워크의 범위와 외부로 보낼 경로, DNS 요청을 보낼 서버를 확인합니다.",
         "protocols": [
           "현재는 로컬 설정 확인 · 패킷 교환 없음",
           "DHCPv4는 사전 설정에 사용할 수 있는 응용 프로토콜"
@@ -4442,9 +4448,9 @@ window.NetworkStudy = {
       },
       {
         "id": "dns",
-        "title": "DNS로 웹 서버 주소 조회",
-        "now": "LAN의 DNS 서버에 www.example.com의 A 레코드를 묻고 203.0.113.80을 받습니다.",
-        "why": "이름으로 입력한 웹사이트를 목적지 IPv4 주소로 바꾸어야 합니다.",
+        "title": "DNS 서버에 웹 서버의 IP 주소 요청",
+        "now": "PC가 같은 LAN의 DNS 서버에 www.example.com의 IPv4 주소를 요청합니다. 이 예시에서는 203.0.113.80을 응답으로 받습니다.",
+        "why": "웹 서버로 패킷을 보내려면 도메인 이름에 해당하는 IP 주소가 필요합니다.",
         "protocols": [
           "DNS 질의·응답 · 이 예시는 UDP 53",
           "IPv4와 이더넷 · 필요 시 먼저 DNS 대상의 ARP 수행"
@@ -4479,9 +4485,9 @@ window.NetworkStudy = {
       },
       {
         "id": "subnet",
-        "title": "웹 목적지의 네트워크 판단",
-        "now": "웹 서버 203.0.113.80이 내 192.168.10.0/24 네트워크 밖에 있음을 확인합니다.",
-        "why": "같은 서브넷이면 대상에게 직접, 다른 서브넷이면 다음 홉 게이트웨이에 프레임을 보내야 합니다.",
+        "title": "웹 서버가 같은 네트워크에 있는지 확인",
+        "now": "PC가 서브넷 마스크로 주소를 비교합니다. 웹 서버 203.0.113.80은 PC의 네트워크인 192.168.10.0/24 밖에 있습니다.",
+        "why": "같은 서브넷이면 상대 장치로 직접 보냅니다. 다른 서브넷이면 라우팅표에 따라 다음 라우터로 보내며, 이 예시에서는 기본 게이트웨이를 이용합니다.",
         "protocols": [
           "IPv4 주소와 서브넷 마스크 계산",
           "로컬 라우팅표 확인 · 이 단계 자체는 패킷을 보내지 않음"
@@ -4508,9 +4514,9 @@ window.NetworkStudy = {
       },
       {
         "id": "arp",
-        "title": "다음 장치의 MAC 확인",
-        "now": "필요하면 같은 LAN에 ARP 요청을 보내 게이트웨이 192.168.10.1의 MAC을 확인합니다.",
-        "why": "IP 목적지는 원격 웹 서버지만, LAN 프레임은 바로 다음 장치인 공유기에게 전달해야 합니다.",
+        "title": "공유기의 MAC 주소 확인",
+        "now": "PC에 공유기의 MAC 주소가 저장되어 있지 않으면 ARP 요청을 보냅니다. 공유기는 자신의 LAN IP 주소인 192.168.10.1에 해당하는 MAC 주소를 알려 줍니다.",
+        "why": "최종 목적지는 웹 서버지만, PC가 LAN에서 프레임을 보낼 대상은 공유기입니다. 따라서 공유기의 MAC 주소가 필요합니다.",
         "protocols": [
           "ARP 요청: LAN 브로드캐스트",
           "ARP 응답: 공유기 LAN 인터페이스 → PC"
@@ -4544,9 +4550,9 @@ window.NetworkStudy = {
       },
       {
         "id": "tcp",
-        "title": "TCP 연결 수립",
-        "now": "PC가 SYN을 보내고 서버가 SYN+ACK으로 응답한 뒤 PC가 ACK을 보내 TCP 연결을 준비합니다.",
-        "why": "순서 있는 신뢰성 있는 바이트 흐름을 제공할 연결 상태와 초기 순서 번호를 맞춥니다.",
+        "title": "PC와 서버의 TCP 연결",
+        "now": "PC가 SYN을 보내면 서버가 SYN+ACK으로 응답합니다. PC가 ACK을 보내 연결을 맺습니다.",
+        "why": "PC와 서버가 데이터를 주고받을 준비를 하고, 각자 사용할 시작 순서 번호를 알립니다.",
         "protocols": [
           "TCP: SYN → SYN+ACK → ACK",
           "IPv4 라우팅과 링크별 이더넷 전달"
@@ -4585,9 +4591,9 @@ window.NetworkStudy = {
       },
       {
         "id": "tls",
-        "title": "TLS 협상",
-        "now": "TCP 위에서 TLS 1.3의 전체 협상을 진행하고, 브라우저가 서버 인증서를 검증하며 보호에 쓸 키를 합의합니다.",
-        "why": "웹 요청·응답의 기밀성·무결성과 서버 인증을 제공하기 위해서입니다.",
+        "title": "서버 인증서 확인과 TLS 연결",
+        "now": "브라우저가 서버 인증서를 검증하고 서버와 암호화에 사용할 키를 정합니다. 이 예시는 TCP 연결에서 TLS 1.3의 전체 연결 절차를 진행하는 경우입니다.",
+        "why": "접속한 서버를 확인하고, 주고받는 내용을 다른 사람이 읽거나 변조하지 못하도록 보호합니다.",
         "protocols": [
           "TLS 1.3: ClientHello, 서버의 협상·인증 정보, Finished 등",
           "이미 연결된 TCP와 동일한 IP·포트 조합 사용"
@@ -4626,9 +4632,9 @@ window.NetworkStudy = {
       },
       {
         "id": "http",
-        "title": "HTTP 요청과 서버 응답",
-        "now": "브라우저의 HTTP 요청을 TLS로 보호해 보내고, 서버가 처리한 HTTP 응답을 같은 연결로 받습니다.",
-        "why": "연결과 보안 준비가 끝난 통로에서 실제 웹 자원을 주고받기 위해서입니다.",
+        "title": "웹 페이지 요청과 응답",
+        "now": "브라우저가 HTTP 요청을 보내고 서버가 웹 페이지 등의 데이터를 응답합니다. 요청과 응답은 TLS로 암호화되어 같은 TCP 연결을 통해 전달됩니다.",
+        "why": "TCP와 TLS로 준비한 연결을 이용해 실제 웹 페이지 데이터를 주고받습니다.",
         "protocols": [
           "HTTP/1.1: 예시 GET / → 200 OK",
           "HTTP 내용은 TLS로 보호되어 TCP 데이터로 전달"

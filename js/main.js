@@ -210,6 +210,7 @@
     const categories = { layer: '계층 관련', multiple: '여러 계층 관련', model: '계층 모델', management: '운영체제·서비스 관리', configuration: '구성·운영 방식' };
     card.append(element('p', `${categories[term.osi.kind]}: ${term.osi.note}`, 'osi-note'));
     card.append(element('p', term.explanation, 'term-explanation preserve-lines'));
+    if (term.learningNote) card.append(disclosure('더 알아보기', element('p', term.learningNote, 'preserve-lines')));
     card.append(element('h4', '실제 사용 예시'), element('p', term.example, 'example-text preserve-lines'));
     if (term.expansions.length) {
       card.append(element('h4', '영어 약어·명칭'), list(term.expansions));
@@ -556,7 +557,7 @@
       // 전체 지도와 같은 경로 도식의 중복 표시를 생략합니다.
       body.append(element('p', step.path, 'path-explanation'));
       const facts = element('div', undefined, 'journey-facts');
-      for (const [title, content] of [['지금 일어나는 일', step.now], ['필요한 이유', step.why], ['사용하는 프로토콜', step.protocols], ['관련 계층', step.layers]]) {
+      for (const [title, content] of [[step.title, step.now], ['이 과정이 필요한 이유', step.why], ['사용하는 프로토콜', step.protocols], ['관련 계층', step.layers]]) {
         const box = element('div');
         box.append(element('h3', title), Array.isArray(content) ? list(content) : element('p', content));
         facts.append(box);
@@ -815,7 +816,8 @@
       const url=new URL(a.href,location.href),term=termById.get(url.hash.slice(1));if(!term||url.origin!==location.origin)return;
       event.preventDefault();const title=element('h2',term.keyword);title.id='concept-dialog-title';dialog.setAttribute('aria-labelledby',title.id);
       const full=termLink(term.id);full.textContent='원문·계층·세부 설명 보기 →';full.dataset.fullConcept='true';full.addEventListener('click',()=>dialog.close());
-      content.replaceChildren(element('p',areaById.get(term.primaryArea).title+' · '+(term.kind==='original'?'원본 항목':'보충 개념'),'dialog-context'),title,element('p',term.explanation,'preserve-lines'),element('h3','실제로는'),element('p',term.example,'preserve-lines'),termLinks(term.relatedTerms,'이어지는 개념'),full);
+      content.replaceChildren(element('p',areaById.get(term.primaryArea).title+' · '+(term.kind==='original'?'원본 항목':'보충 개념'),'dialog-context'),title,element('p',term.explanation,'preserve-lines'),element('h3','사용 예시'),element('p',term.example,'preserve-lines'),termLinks(term.relatedTerms,'이어지는 개념'),full);
+      if(term.learningNote) content.insertBefore(disclosure('더 알아보기', element('p',term.learningNote,'preserve-lines')), full);
       if(!dialog.open)dialog.showModal();dialog.scrollTop=0;close.focus();
     });
   }
