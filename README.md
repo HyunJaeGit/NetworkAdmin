@@ -77,20 +77,22 @@ GitHub Pages와 같은 `/NetworkAdmin/` 경로를 확인하려면 저장소를 `
 
 기존 데이터 검증 결과는 원본 83개·보충 7개입니다. UI 개편 후에는 변경된 클릭 설명, 펼치기, 페이지 이동과 모바일 가로 넘침을 중심으로 확인합니다. 실제 기기·스크린 리더 전체 검증과 공개 배포는 별도입니다.
 
-## GitHub Pages 배포
+## GitHub Actions로 GitHub Pages 배포
 
-저장소 연결과 `main` 브랜치는 이미 설정되어 있습니다. 아래 명령은 사용자가 변경 내용을 검토한 뒤 Git Bash에서 실행합니다.
+저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정합니다. `.github/workflows/deploy.yml`은 `main`에 푸시할 때 실행되며, 별도 빌드 없이 `index.html`, `css/`, `html/`, `js/`만 배포합니다. README와 원본 참고 TXT는 배포 대상에서 제외합니다. 별도 토큰이나 Secrets 등록은 필요하지 않습니다.
+
+아래 명령은 사용자가 변경 내용을 검토한 뒤 Git Bash에서 실행합니다.
 
 ```bash
 git status --short
 git diff --check
-git add README.md ux-ui-review.txt index.html html js css "network admin text keyword list.txt"
+git add .github/workflows/deploy.yml README.md
 git diff --cached --stat
-git commit -m "Complete network study site phases 1-4"
+git commit -m "Add GitHub Actions workflow for Pages deployment"
 git push origin main
 ```
 
-GitHub 저장소의 **Settings → Pages → Build and deployment**에서 **Source: Deploy from a branch**, **Branch: main**, **Folder: /(root)**를 선택하고 **Save**를 누릅니다. 게시 상태와 실제 주소는 Pages 화면에서 확인합니다. [GitHub 공식 배포 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+푸시 후 저장소의 **Actions → Deploy to GitHub Pages**에서 실행 결과를 확인합니다. 배포 주소는 성공한 실행의 `github-pages` 환경 링크 또는 **Settings → Pages**에서 확인합니다. 수동 재배포는 **Actions → Deploy to GitHub Pages → Run workflow**에서 `main`을 선택해 실행합니다. [GitHub 공식 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 
 모든 내부 링크·리소스는 상대 경로입니다. 배포 후에도 용어 설명 열기, 새로고침, 지도·시각화를 확인하세요. 이 작업에서는 커밋·푸시·Pages 설정 변경·공개 배포를 실행하지 않았습니다.
 
