@@ -366,3 +366,40 @@ th {
     text-decoration: none;
   }
 }
+
+/* 각 인쇄 페이지의 아래쪽 여백에 해당 과목명을 표시합니다. */
+@page general {
+  @bottom-center {
+    content: "네트워크일반";
+    font-family: "Malgun Gothic", sans-serif;
+    font-size: 9pt;
+    color: #000;
+  }
+}
+
+@page tcpip {
+  @bottom-center {
+    content: "TCP/IP";
+    font-family: "Malgun Gothic", sans-serif;
+    font-size: 9pt;
+    color: #000;
+  }
+}
+
+@page nos {
+  @bottom-center {
+    content: "NOS";
+    font-family: "Malgun Gothic", sans-serif;
+    font-size: 9pt;
+    color: #000;
+  }
+}
+
+@page equipment {
+  @bottom-center {
+    content: "네트워크 운용기기";
+    font-family: "Malgun Gothic", sans-serif;
+    font-size: 9pt;
+    color: #000;
+  }
+}
