@@ -1341,62 +1341,60 @@
   }
 
   // 선택 범위만 렌더링하여 미리보기와 실제 출력 내용을 일치시킵니다.
-  function renderPreview() {
-    const selectedSubjects = subjects.filter((subject) => {
-      return subjectSelect.value === "all" ||
-        subject.id === subjectSelect.value;
+  // 과목별 내용을 표시하고 인쇄 페이지에 해당 과목을 지정합니다.
+function renderPreview() {
+  const selectedSubjects = subjects.filter((subject) => {
+    return subjectSelect.value === "all" ||
+      subject.id === subjectSelect.value;
+  });
+
+  const memoryOnly = modeSelect.value === "memory";
+  const subjectLabel = subjectSelect.selectedOptions[0].textContent;
+  const modeLabel = memoryOnly ? "암기 포인트" : "전체 핵심 요약";
+  const fragment = document.createDocumentFragment();
+
+  // 첫 페이지의 제목도 첫 번째 과목과 같은 인쇄 페이지를 사용합니다.
+  preview.style.page = selectedSubjects[0].id;
+
+  const header = createElement("header", undefined, "document-header");
+
+  header.append(
+    createElement("h1", "네트워크관리사 2급 핵심 요약")
+  );
+
+  fragment.append(header);
+
+  selectedSubjects.forEach((subject) => {
+    const article = createElement("article", undefined, "subject");
+    const heading = createElement("header", undefined, "subject-header");
+
+    // 과목이 여러 페이지로 이어져도 같은 과목 꼬리말을 표시합니다.
+    article.style.page = subject.id;
+
+    heading.append(createElement("h2", subject.title));
+    article.append(heading);
+
+    subject.topics.forEach((topic) => {
+      article.append(createTopic(topic, memoryOnly));
     });
 
-    const memoryOnly = modeSelect.value === "memory";
-    const subjectLabel = subjectSelect.selectedOptions[0].textContent;
-    const modeLabel = memoryOnly ? "암기 포인트" : "전체 핵심 요약";
-    const fragment = document.createDocumentFragment();
+    fragment.append(article);
+  });
 
-    const header = createElement("header", undefined, "document-header");
+  preview.replaceChildren(fragment);
+  preview.classList.toggle("memory-mode", memoryOnly);
 
-    header.append(
-      createElement("h1", "네트워크관리사 2급 핵심 요약"),
-      createElement(
-        "p",
-        `${subjectLabel} / ${modeLabel} · v0.2`,
-        "document-meta"
-      ),
-      createElement(
-        "p",
-        "필기 4과목의 핵심 개념·비교표·계산 예제입니다. 기출문제 풀이와 함께 복습하세요.",
-        "draft-note"
-      )
-    );
+  const topicCount = selectedSubjects.reduce((total, subject) => {
+    return total + subject.topics.length;
+  }, 0);
 
-    fragment.append(header);
+  // 화면의 준비 상태 안내는 유지하며 인쇄에는 포함되지 않습니다.
+  status.textContent =
+    `${selectedSubjects.length}개 과목 · ${topicCount}개 항목 · ${modeLabel}`;
 
-    selectedSubjects.forEach((subject) => {
-      const article = createElement("article", undefined, "subject");
-      const heading = createElement("header", undefined, "subject-header");
-
-      heading.append(createElement("h2", subject.title));
-      article.append(heading);
-
-      subject.topics.forEach((topic) => {
-        article.append(createTopic(topic, memoryOnly));
-      });
-
-      fragment.append(article);
-    });
-
-    preview.replaceChildren(fragment);
-    preview.classList.toggle("memory-mode", memoryOnly);
-
-    const topicCount = selectedSubjects.reduce((total, subject) => {
-      return total + subject.topics.length;
-    }, 0);
-
-    status.textContent =
-      `${selectedSubjects.length}개 과목 · ${topicCount}개 항목 · ${modeLabel}`;
-
-    document.title =
-      `네트워크관리사2급_${subjectLabel}_${modeLabel}`;
-  }
+  document.title =
+    `네트워크관리사2급_${subjectLabel}_${modeLabel}`;
+}
 
   // 폰트와 화면 갱신을 기다린 후 브라우저 인쇄창을 엽니다.
   async function printSummary() {
