@@ -368,8 +368,19 @@ th {
 }
 
 /* 각 인쇄 페이지의 아래쪽 여백에 해당 과목명을 표시합니다. */
-@page general {
+/* 모든 인쇄 페이지의 하단 중앙에 페이지 번호를 표시합니다. */
+@page {
   @bottom-center {
+    content: counter(page);
+    font-family: "Malgun Gothic", sans-serif;
+    font-size: 9pt;
+    color: #000;
+  }
+}
+
+/* 과목명은 해당 페이지의 상단 우측에 표시합니다. */
+@page general {
+  @top-right {
     content: "네트워크일반";
     font-family: "Malgun Gothic", sans-serif;
     font-size: 9pt;
@@ -378,7 +389,7 @@ th {
 }
 
 @page tcpip {
-  @bottom-center {
+  @top-right {
     content: "TCP/IP";
     font-family: "Malgun Gothic", sans-serif;
     font-size: 9pt;
@@ -387,7 +398,7 @@ th {
 }
 
 @page nos {
-  @bottom-center {
+  @top-right {
     content: "NOS";
     font-family: "Malgun Gothic", sans-serif;
     font-size: 9pt;
@@ -396,7 +407,7 @@ th {
 }
 
 @page equipment {
-  @bottom-center {
+  @top-right {
     content: "네트워크 운용기기";
     font-family: "Malgun Gothic", sans-serif;
     font-size: 9pt;
