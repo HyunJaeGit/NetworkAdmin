@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- 과목별 요약집 미리보기와 PDF 저장 진입 화면입니다. -->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>요약집 프린트 · 네트워크 노트</title>
+
+  <link rel="stylesheet" href="./print.css">
+  <script defer src="./print.js"></script>
+</head>
+
+<body>
+  <header class="toolbar screen-only">
+    <div class="toolbar-inner">
+      <a class="back-link" href="../../index.html">
+        ← 네트워크 노트
+      </a>
+
+      <h1>요약집 프린트</h1>
+
+      <div class="controls">
+        <label>
+          출력 과목
+          <select id="subject-select">
+            <option value="all">전체 과목</option>
+            <option value="general">네트워크일반</option>
+            <option value="tcpip">TCP/IP</option>
+            <option value="nos">NOS</option>
+            <option value="equipment">네트워크 운용기기</option>
+          </select>
+        </label>
+
+        <label>
+          출력 내용
+          <select id="mode-select">
+            <option value="full">전체 핵심 요약</option>
+            <option value="memory">암기 포인트만</option>
+          </select>
+        </label>
+
+        <button id="print-button" type="button" disabled>
+          인쇄 / PDF 저장
+        </button>
+      </div>
+
+      <p class="print-guide">
+        인쇄창에서 <strong>PDF로 저장</strong>을 선택하세요.
+        권장 설정: A4 · 배율 100% · 머리글/바닥글 해제
+      </p>
+
+      <p id="preview-status" role="status" aria-live="polite">
+        요약집을 준비하고 있습니다.
+      </p>
+    </div>
+  </header>
+
+  <main id="preview" class="paper" aria-label="요약집 미리보기">
+    <noscript>
+      요약집을 표시하려면 JavaScript를 켜 주세요.
+    </noscript>
+  </main>
+
+  <footer class="screen-footer screen-only">
+    실제 페이지 나눔은 브라우저 인쇄 미리보기에서 확인하세요.
+  </footer>
+</body>
+</html>
